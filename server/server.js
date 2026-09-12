@@ -26,19 +26,24 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.use('/',applicationRoute);
-app.use('/',authRoute);
-app.use('/',jobRoute);
+app.use('/api', applicationRoute);
+app.use('/api', authRoute);
+app.use('/api', jobRoute);
 // app.use('/job', jobRoute);
 
 
 connectDB();
+
+
+// Serve the built React frontend
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// Catch-all: any route not matched by the API sends back the React app
+app.get('/*splat', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
 app.listen(PORT,()=>{
     console.log(`Server started at ${PORT}`);
 })
 
-
-app.use(express.static(path.join(__dirname, '../client/dist')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-});

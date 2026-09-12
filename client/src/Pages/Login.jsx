@@ -1,20 +1,22 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-
+import { useAuth } from '../Components/Context/AuthContext';
 function Login() {
   const navigate = useNavigate();
+  const { setUser } = useAuth(); 
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
+
 const handleSubmit = async (e) => {
   e.preventDefault();
   setError('');
   setLoading(true);
   try {
-    const res = await fetch('http://localhost:3002/login', {
+    const res = await fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -22,7 +24,7 @@ const handleSubmit = async (e) => {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Something went wrong');
-
+    setUser(data.user);
     if (data.user.role === 'employer') {
   navigate('/employer/dashboard');
     } else {

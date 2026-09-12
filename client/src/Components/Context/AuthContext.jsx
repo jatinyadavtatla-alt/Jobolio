@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
 
   const fetchMe = async () => {
     try {
-      const res = await fetch('http://localhost:3002/me', {
+      const res = await fetch('/api/me', {
         credentials: 'include',
       });
       if (!res.ok) {
@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const logout = async () => {
-    await fetch('http://localhost:3002/logout', {
+    await fetch('/api/logout', {
       method: 'POST',
       credentials: 'include',
     });

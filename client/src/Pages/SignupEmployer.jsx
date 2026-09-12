@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../Components/Context/AuthContext';
+
 
 function SignupEmployer() {
   const navigate = useNavigate();
+  const { setUser } = useAuth(); 
   const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -14,7 +17,7 @@ function SignupEmployer() {
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3002/signup', {
+      const res = await fetch('api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
