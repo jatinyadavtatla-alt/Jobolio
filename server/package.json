@@ -7,8 +7,8 @@
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "build": "cd client && npm install && npm run build && cd ../server && npm install",
+    "start": "cd server && node server.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
