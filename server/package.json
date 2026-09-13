@@ -1,15 +1,16 @@
+
 {
-  "name": "server",
+  "name": "jobolio",
   "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "",
-  "type": "commonjs",
-  "main": "server.js",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "build": "cd client && npm install && npm run build && cd ../server && npm install",
     "start": "cd server && node server.js"
   },
+
   "dependencies": {
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
